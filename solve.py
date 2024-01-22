@@ -15,10 +15,10 @@ def racket_calculator(equation):
 			evaluate.push(ch)
 		elif(ch in op):
 			evaluate.push(ch)
-			if (ch == '-'):
-				opcount += ch
+			if (ch in '+-'):
+				opcount = ch
 		elif(ch in num):
-			if (opcount == '-'):    
+			if (opcount == '-' or opcount == '+'):
 				count += opcount
 				evaluate.pop()
 				opcount = ''
@@ -33,9 +33,9 @@ def racket_calculator(equation):
 				evaluate.push(count)
 			count = ''
 			ans = 0
-			while str(evaluate.top()).lstrip('-').isdigit():
+			while str(evaluate.top()).lstrip('+-').isdigit():
 				numbers.push(int(evaluate.pop()))
-			while str(evaluate.top()).lstrip('-').replace('.', '').isdigit():
+			while str(evaluate.top()).lstrip('+-').replace('.', '').isdigit():
 				numbers.push(float(evaluate.pop()))
 			while(numbers.size() < 2):
 				if(evaluate.top() in '+-'):
