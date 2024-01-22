@@ -2,7 +2,6 @@ from stack import Stack
 
 def racket_calculator(equation):
 	evaluate = Stack()
-	calculate = equation
 	op = '+-*/'
 	num = '.0123456789'
 	numbers = Stack()
@@ -10,7 +9,7 @@ def racket_calculator(equation):
 	count = ''
 	opcount = ''
 
-	for ch in calculate:
+	for ch in equation:
 		if(ch == '('):
 			evaluate.push(ch)
 		elif(ch in op):
@@ -37,6 +36,8 @@ def racket_calculator(equation):
 				numbers.push(int(evaluate.pop()))
 			while str(evaluate.top()).lstrip('+-').replace('.', '').isdigit():
 				numbers.push(float(evaluate.pop()))
+			if(numbers.size() == 0 and evaluate.top() in '-/'):
+				return ValueError("Incorrect Statement: No arguments")
 			while(numbers.size() < 2):
 				if(evaluate.top() in '+-'):
 					numbers.push(0);
@@ -59,10 +60,10 @@ def racket_calculator(equation):
 				while(numbers.size() > 0):
 					ans /= numbers.pop()
 			else:
-				raise ValueError("Incorrect Statement: Unknown symbol")
+				return ValueError("Incorrect Statement: Unknown symbol")
 			evaluate.pop()
 			evaluate.pop()
 			evaluate.push(ans)
 		else:
-			raise ValueError("Incorrect Statement: Unknown symbol")
+			return ValueError("Incorrect Statement: Unknown symbol")
 	return(ans)
