@@ -1,37 +1,15 @@
 from solve import *
 
 if(__name__ == "__main__"):
-	results = []
-	cases = [
-		'(+ 3 5)',
-		'(+ (- 2 4) 5 6)',
-		"(+ (- 5) 6)",
-		"(+ (- 5) 6 7)",
-		"(+ (- 3 5) 6)",
-		"(+ 5)",
-		"(- 5)",
-		"(* 5)",
-		"(/ 5)",
-		"(- 5 3 (+ 2 6))",
-		"(+)",
-		# "(-)",
-		"(*)",
-		'(+ 3 7)',
-		'(- 8 3)',
-		'(* 4 6)',
-		'(/ 25 5)',
-		'(+ (* 7 4) (+ 3 8))',
-		'(- 20.3 -5.0)',
-		'(- 0 5.0)',
-		'(/ 3 3 3)',
-		'(/ 4000 1000)',
-		'(/ 10000 10.0 10 10.0 10)',
-	]
-	for case in cases:
-		results.append(racket_calculator(case))
-	print(results)
-	# 8, 9, 1, 8, 4, 
-	# 5, -5, 5, 1/5, -6, 
-	# 0, 1, 10, 5, 24, 
-	# 5, 39, 25.3, -5.0, 1/3,
-	# 4.0, 1.0
+	x = 0;
+	while(x != ValueError):
+		case = input("Type the racket you want calculated, or type 'end' to exit: ")
+		if(case == 'end'):
+			break;
+		elif('end' in case):
+			case = input("Do you want to exit? (y/N): ")
+			if(case == 'Y' or case == 'y'):
+				break;
+		else:
+			x = racket_calculator(case)
+			print("Result:", x);
