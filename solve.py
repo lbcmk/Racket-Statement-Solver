@@ -63,4 +63,6 @@ def racket_calculator(equation):
 			evaluate.pop()
 			evaluate.pop()
 			evaluate.push(ans)
+		else:
+			raise ValueError("Incorrect Statement: Unknown symbol")
 	return(ans)

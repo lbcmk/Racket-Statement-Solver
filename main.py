@@ -11,5 +11,8 @@ if(__name__ == "__main__"):
 			if(case == 'Y' or case == 'y'):
 				break;
 		else:
-			x = racket_calculator(case)
-			print("Result:", x);
+			try:
+				x = racket_calculator(case)
+				print("Result:", x);
+			except ValueError:
+				print("Incorrect Statement: Unknown symbol")
