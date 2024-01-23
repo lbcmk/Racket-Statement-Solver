@@ -14,9 +14,11 @@ def racket_calculator(equation):
 			evaluate.push(ch)
 		elif(ch in op):
 			evaluate.push(ch)
-			if (ch in '+-'):
+			if (ch in '+-*/'):
 				opcount = ch
 		elif(ch in num):
+			if(opcount == '/' or opcount == '*'):
+				return ValueError("Incorrect Statement: Unknown symbol")
 			if (opcount == '-' or opcount == '+'):
 				count += opcount
 				evaluate.pop()
@@ -32,17 +34,18 @@ def racket_calculator(equation):
 				evaluate.push(count)
 			count = ''
 			ans = 0
-			while str(evaluate.top()).lstrip('+-').isdigit():
-				numbers.push(int(evaluate.pop()))
-			while str(evaluate.top()).lstrip('+-').replace('.', '').isdigit():
+			while(check_digit(evaluate.top())):
 				numbers.push(float(evaluate.pop()))
-			if(numbers.size() == 0 and evaluate.top() in '-/'):
+					
+			if(numbers.size() == 0 and str(evaluate.top()) in '-/'):
 				return ValueError("Incorrect Statement: No arguments")
+				
 			while(numbers.size() < 2):
-				if(evaluate.top() in '+-'):
-					numbers.push(0);
-				elif(evaluate.top() in '*/'):
+				if(str(evaluate.top()) in '*/'):
 					numbers.push(1);
+				else:
+					numbers.push(0);
+
 			if(evaluate.top() == '+'):
 				ans += numbers.pop()
 				while(numbers.size() > 0):
@@ -66,4 +69,15 @@ def racket_calculator(equation):
 			evaluate.push(ans)
 		else:
 			return ValueError("Incorrect Statement: Unknown symbol")
-	return(ans)
+	if(int(ans) == ans):
+		return(int(ans))
+	else:
+		return(ans)
+
+
+def check_digit(number):
+	try:
+		float(number)
+		return True
+	except ValueError:
+		return False
