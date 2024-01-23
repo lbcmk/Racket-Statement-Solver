@@ -36,6 +36,9 @@ cases = [
 	'(5)',
 	'()',
 	'(.)',
+	'(- - 1)',
+	'(+ 1 (+ 1)',
+	'(+ 1 (+ 1)))',
 ]
 
 answers = [
@@ -45,13 +48,15 @@ answers = [
 	'5', '39', '25.3', '-5', '0.3333333333333333',
 	'4', '1', '10', '-10', '0', 
 	'10', '59.63636363636363', 'Incorrect Statement: No arguments', 'Incorrect Statement: No arguments', 'Incorrect Statement: Unknown symbol',
-	'Incorrect Statement: Unknown symbol', 'Incorrect Statement: Unknown symbol', 'Incorrect Statement: Unknown symbol'
+	'Incorrect Statement: Unknown symbol', 'Incorrect Statement: Unknown symbol', 'Incorrect Statement: Unknown symbol', 'Incorrect Statement: Contract Violation',
+	'Incorrect Statement: Expected a `)` to close `(`', 'Incorrect Statement: Unexpected `)`'
 ]
 
 x = True
 for i in range(len(cases)):
 	if(str(racket_calculator(cases[i])) != answers[i]):
 		x = False;
+		print(str(racket_calculator(cases[i])), answers[i])
 		break;
 
 if(x):

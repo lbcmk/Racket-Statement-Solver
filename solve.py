@@ -8,10 +8,12 @@ def racket_calculator(equation):
 	ans = 0
 	count = ''
 	opcount = ''
+	brackets = 0
 
 	for ch in equation:
 		if(ch == '('):
 			evaluate.push(ch)
+			brackets += 1
 		elif(ch in op):
 			evaluate.push(ch)
 			if (ch in '+-*/'):
@@ -30,6 +32,10 @@ def racket_calculator(equation):
 				evaluate.push(count)
 				count = ''
 		elif(ch == ')'):
+			brackets -= 1;
+			if(brackets < 0):
+				return ValueError("Incorrect Statement: Unexpected `)`")
+				
 			if (count != ''):
 				evaluate.push(count)
 			count = ''
@@ -70,6 +76,9 @@ def racket_calculator(equation):
 			evaluate.push(ans)
 		else:
 			return ValueError("Incorrect Statement: Unknown symbol")
+	if(brackets != 0):
+		return ValueError("Incorrect Statement: Expected a `)` to close `(`")
+
 	if(int(ans) == ans):
 		return(int(ans))
 	else:
