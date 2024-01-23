@@ -65,7 +65,8 @@ def racket_calculator(equation):
 			else:
 				return ValueError("Incorrect Statement: Unknown symbol")
 			evaluate.pop()
-			evaluate.pop()
+			if(evaluate.pop() != '('):
+				return ValueError("Incorrect Statement: Contract Violation")
 			evaluate.push(ans)
 		else:
 			return ValueError("Incorrect Statement: Unknown symbol")
